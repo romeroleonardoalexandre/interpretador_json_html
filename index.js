@@ -1,8 +1,10 @@
-import { React } from './modules/react.js';
 
 // create the canvas and reporting list
-let react = new React(html, document.body, 480, 320);
-myCanvas.create();
-myCanvas.createReportList();
+export default function initInterpretador(objeto = 'react', json_data = {}){
+	if(objeto == 'react'){
+		import React from './modules/react.js';
+		let Interpretador = new React(json_data)
+	}
 
-
+	return Interpretador.init()
+}
