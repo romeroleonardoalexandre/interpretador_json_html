@@ -208,12 +208,12 @@ class React {
 	 formStepsActions (index)  {
 		if (index == 1){
 			return `<div className="form-action col-xs-12">
-				<button onClick={()  this.next()} type="button" className="btn btn-primary next" >Seguinte</button>
+				<button onClick={() => this.next()} type="button" className="btn btn-primary next" >Seguinte</button>
 			</div>`
 		}else if(index < this.formStepsList.length){
 			return `<div className="form-action col-xs-12">
-				<button onClick={()  this.previous()} type="button" className="btn btn-primary previous" >Anterior</button>
-				<button onClick={()  this.next()} type="button" className="btn btn-primary next" >Seguinte</button>
+				<button onClick={() => this.previous()} type="button" className="btn btn-primary previous" >Anterior</button>
+				<button onClick={() => this.next()} type="button" className="btn btn-primary next" >Seguinte</button>
 			</div>`
 		}
 		return ``
@@ -355,9 +355,9 @@ class React {
 		return `
 		<div class="col-xs-12">
 		${this.formStepsList.length ? `
-				<button onClick={()  this.previous()} type="button" className="btn btn-primary previous" >Anterior</button>
+				<button onClick={() => this.previous()} type="button" className="btn btn-primary previous" >Anterior</button>
 			` : ``}
-		<button onClick={()  this.submit()} type="button" id="${data.fields.id.value}" name="${data.fields.id.value}" className="${data.fields.cssClass.value}">Enviar</button>
+		<button onClick={() => this.submit()} type="button" id="${data.fields.id.value}" name="${data.fields.id.value}" className="${data.fields.cssClass.value}">Enviar</button>
 		</div>
 		`
 	}
@@ -367,7 +367,7 @@ class React {
 		this.formStepsList = data.fields.steps.value
 
 		return `
-		<div className="${data.fields.steps.name}">
+		<div className="steps">
 			${data.fields.steps.value.forEach((step, index) => {
 				steps += `<div className="step ${index == 0 ? "current" : ""}" data-step="${index}">
 					<div className="stage">${index + 1}</div> 
