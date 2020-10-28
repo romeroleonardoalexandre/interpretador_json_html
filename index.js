@@ -333,7 +333,7 @@ class React {
 							<div className="panel-body">
 								<div className="form-container">
 									<div id="messages"></div>
-									<form action="#" method="post" encType="multipart/form-data"  id="form-app">
+									<form action="#" method="post" encType="multipart/form-data" id="form-app">
 										${form_data.settings.formSteps ? this.formSteps(form_data.settings.formSteps) : ""}
 										<fieldset className="row" data-index="0">
 										${this.elementCreate(form_data.initForm)}
@@ -354,7 +354,7 @@ class React {
 	 button (data)  {
 		return `
 		<div class="col-xs-12">
-		${this.formStepsList.length ? `
+		${this.formStepsList.length > 0 ? `
 				<button onClick={() => this.previous()} type="button" className="btn btn-primary previous" >Anterior</button>
 			` : ``}
 		<button onClick={() => this.submit()} type="button" id="${data.fields.id.value}" name="${data.fields.id.value}" className="${data.fields.cssClass.value}">Enviar</button>
