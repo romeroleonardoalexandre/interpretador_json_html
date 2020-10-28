@@ -334,12 +334,12 @@ class React {
 								<div className="form-container">
 									<div id="messages"></div>
 									<form action="#" method="post" encType="multipart/form-data" id="form-app">
-										${form_data.settings.formSteps ? this.formSteps(form_data.settings.formSteps) : ""}
+										${typeof form_data.settings.formSteps !== 'undefined' ? this.formSteps(form_data.settings.formSteps) : ""}
 										<fieldset className="row" data-index="0">
 										${this.elementCreate(form_data.initForm)}
 										</fieldset>
 									</form>
-									${form_data.settings.formSteps.progressBar ? this.progressBar() : ""}
+									${typeof form_data.settings.formSteps.progressBar !== 'undefined' ? this.progressBar() : ""}
 								</div>
 							</div>
 						</div>
