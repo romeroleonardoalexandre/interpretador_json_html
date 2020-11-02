@@ -1,5 +1,3 @@
-
-
 class React {
 	formStepsList = []
 	formData = ""
@@ -24,6 +22,9 @@ class React {
 					break;
 				case "text":
 					elements += this.text(element)
+					break;
+				case "number":
+					elements += this.number(element)
 					break;
 				case "email":
 					elements += this.text(element)
@@ -52,7 +53,15 @@ class React {
 				case "button":
 					elements += this.button(element) 
 					break;
-				
+				case "recaptcha":
+					elements += this.recaptcha(element)
+					break;
+				case "spacer":
+					elements += this.spacer(element)
+					break;
+				case "signature":
+					elements += this.signature(element)
+					break;
 				default:
 					elements += ""
 			} 
@@ -165,7 +174,7 @@ class React {
 
 	 heading (data)  {
 		return `
-		<div className="col-xs-12">
+		<div className="${data.fields.containerClass.value}">
 			<h3 className="legend">${data.fields.text.value}</h3>
 		</div>
 
@@ -174,7 +183,7 @@ class React {
 
 	 paragriph (data)  {
 		return `
-		<div className="col-xs-12">
+		<div className="${data.fields.containerClass.value}">
 			<p>${data.fields.text.value}</p>
 		</div>
 
@@ -183,7 +192,7 @@ class React {
 
 	 text (data)  {
 		return `
-		<div className="col-xs-12">
+		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
 				<label  className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 				<input type="${data.name}" id="${data.fields.id.value}" name="${data.fields.id.value}" data-alias="${data.fields.alias.value}" placeholder="${data.fields.placeholder.value}" className="${data.fields.cssClass.value}" />
@@ -193,9 +202,28 @@ class React {
 		`
 	}
 
+	number (data) {
+		return `
+		<div className="${data.fields.containerClass.value}">
+			<div className="form-group">
+				<label  className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
+				<input type="number" id="${data.fields.id.value}" name="${data.fields.id.value}" value="" data-alias="${data.fields.alias.value}"  className="${data.fields.cssClass.value}" />
+			</div>
+		</div>
+		`
+	}		
+
+	spacer(data) {
+		return `
+		<div className="${data.fields.containerClass.value}">
+			<div style="{{height: ${data.fields.height.value}}}" ></div>
+		</div>
+		`
+	}
+
 	 textarea (data)  {
 		return `
-		<div className="col-xs-12">
+		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
 				<label  className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 				<textarea type="${data.name}" rows="${data.fields.fieldSize.value}" id="${data.fields.id.value}" name="${data.fields.id.value}" data-alias="${data.fields.alias.value}" placeholder="${data.fields.placeholder.value}" className="${data.fields.cssClass.value}" />
@@ -207,11 +235,11 @@ class React {
 
 	 formStepsActions (index)  {
 		if (index == 1){
-			return `<div className="form-action col-xs-12">
+			return `<div className="form-action ${data.fields.containerClass.value}">
 				<button onClick={() => this.next()} type="button" className="btn btn-primary next" >Seguinte</button>
 			</div>`
 		}else if(index < this.formStepsList.length){
-			return `<div className="form-action col-xs-12">
+			return `<div className="form-action ${data.fields.containerClass.value}">
 				<button onClick={() => this.previous()} type="button" className="btn btn-primary previous" >Anterior</button>
 				<button onClick={() => this.next()} type="button" className="btn btn-primary next" >Seguinte</button>
 			</div>`
@@ -232,7 +260,7 @@ class React {
 	 radio (data)  {
 		let loop = ""
 		return `
-		<div className="col-xs-12">
+		<div className="${data.fields.containerClass.value}">
 			<div className="form-group"> 
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 					${data.fields.radios.value.forEach((radio, index) => {
@@ -255,7 +283,7 @@ class React {
 	 checkbox (data)  {
 		let loop = ""
 		return `
-		<div className="col-xs-12">
+		<div className="${data.fields.containerClass.value}">
 			<div className="form-group"> 
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 				${data.fields.checkboxes.value.forEach((checkbox, index) => {
@@ -277,7 +305,7 @@ class React {
 	 selectlist (data)  {
 		let loop = ""
 		return `
-		<div className="col-xs-12">
+		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 				<select id="${data.fields.id.value}" name="${data.fields.id.value}[]" data-alias=""  className="${data.fields.cssClass.value}">
@@ -296,7 +324,7 @@ class React {
 
 	 date (data)  {
 		return `
-		<div className="col-xs-12">
+		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 				<input type="date" id="${data.fields.id.value}" name="${data.fields.id.value}" defaultValue="" data-alias="" className="${data.fields.cssClass.value}" />
@@ -308,13 +336,40 @@ class React {
 
 	 file (data)  {
 		return `
-		<div className="col-xs-12">
+		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 				<input type="file" id="${data.fields.id.value}" name="${data.fields.id.value}[]" data-alias="" accept=".gif, .jpg, .png" />
 			</div>
 		</div>
 
+		`
+	}
+
+	signature (data) {
+		return `
+		<div className="${data.fields.containerClass.value}">
+			<div className="form-group">
+				<label  className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">Signature</label>
+				<div className="signature-pad">
+					<canvas id="${data.fields.id.value}" width="${data.fields.width.value}" height="${data.fields.height.value}" data-color="${data.fields.color.value}" ></canvas>
+				</div>
+				
+				<div className="signature-pad-actions">
+					<button type="button" id="clear_${data.fields.id.value}" name="clear_${data.fields.id.value}" className="btn btn-sm btn-default btn-clear" data-exclude="true">Apagar</button>
+					<button type="button" id="undo_${data.fields.id.value}" name="undo_${data.fields.id.value}" className="btn btn-sm btn-default btn-undo" data-exclude="true">Undo</button>
+				</div>
+				<input type="hidden" name="hidden_${data.fields.id.value}" id="hidden_${data.fields.id.value}" value="" data-alias="${data.fields.alias.value}" data-label="${data.fields.id.value}"  />
+			</div>
+		</div>
+		`
+	}
+
+	recaptcha (data) {
+		return `
+		<div className="form-group ${data.fields.containerClass.value}">
+			<div id="${data.fields.id.value}" className="g-recaptcha" data-sitekey="6Lf5Tt4ZAAAAAPCMN7WSRFSpb40H4tWNU9FcTuwI" data-theme="${data.fields.theme.value[0].selected === true ? data.fields.theme.value[0].value : data.fields.theme.value[1].value}" data-type="${data.fields.theme.value[0].selected === true ? data.fields.type.value[0].value : data.fields.type.value[1].value}" data-size="${data.fields.size.value[0].selected === true ? data.fields.size.value[0].value : data.fields.size.value[1].value}"></div>
+		</div>
 		`
 	}
 
@@ -353,7 +408,7 @@ class React {
 
 	 button (data)  {
 		return `
-		<div class="col-xs-12">
+		<div class="${data.fields.containerClass.value}">
 		${this.formStepsList.length > 0 ? `
 				<button onClick={() => this.previous()} type="button" className="btn btn-primary previous" >Anterior</button>
 			` : ``}
