@@ -1,9 +1,9 @@
 class React {
-	formStepsList = []
-	formData = ""
 
 	constructor(Json_data){
 		this.formData = Json_data
+		this.formStepsList = []
+		this.formData = ""
 	}
 
 	init ()  {
@@ -450,9 +450,8 @@ class React {
 
 function initInterpretador(objeto = 'react', json_data = {}){
 	let Interpretador
-	if(objeto == 'react'){
+	if(objeto == 'react')
 		Interpretador = new React(json_data)
-	}
 
 	return Interpretador.init()
 }
