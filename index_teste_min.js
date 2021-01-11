@@ -1,97 +1,69 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<!-- <script type="module" src="https://cdn.jsdelivr.net/gh/romeroleonardoalexandre/interpretador_json_html@master/index.js"></script> -->
-</head>
-<body>
+class React {
 
-<!--  -->
-	<script type="text/javascript">
-	const loadJSON = (callback) => {
-	    let xobj = new XMLHttpRequest();
-	    xobj.overrideMimeType("application/json");
-	    xobj.open('GET', 'https://demo0157883.mockable.io', true);
-	    // Replace 'my_data' with the path to your file
-	    xobj.onreadystatechange = () => {
-	        if (xobj.readyState === 4 && xobj.status === 200) {
-	            // Required use of an anonymous callback 
-	            // as .open() will NOT return a value but simply returns undefined in asynchronous mode
-	            callback(xobj.responseText);
-	        }
-	    };
-	    xobj.send(null);
+	constructor(Json_data){
+		this.formData = Json_data
+		this.formStepsList = []
+		this.formData = ""
 	}
 
-	// let formStepsList = []
-
-	const init = () => {
-	    loadJSON((response) => {
-
-	        // Parse JSON string into object
-			let json_object = JSON.parse(response);
-			// console.log(initInterpretador('react', json_object))
-			console.log(formInit(json_object))
-
-	    });
+	init ()  {
+		return this.initReact(this.formData)
 	}
 
-	init()
-
-
-	const elementCreate = (formData) => {
+	elementCreate(formData){
 		let elements = ""
 		formData.forEach((element) => {
 			switch(element.name) {
-			case "heading":
-				elements += heading(element)
-				break;
-			case "paragraph":
-				elements += paragriph(element)
-				break;
-			case "text":
-				elements += text(element)
-				break;
-			case "number":
-				elements += number(element)
-				break;
-			case "email":
-				elements += text(element)
-				break;
-			case "textarea":
-				elements += textarea(element)
-				break;
-			case "pagebreak":
-				elements += pagebreak(element)
-				break;
-			case "radio":
-				elements += radio(element)
-				break;
-			case "checkbox":
-				elements += checkbox(element)
-				break;
-			case "selectlist":
-				elements += selectlist(element)
-				break;
-			case "date":
-				elements += date(element)
-				break;
-			case "file":
-				elements += file(element)
-				break;
-			case "button":
-				elements += button(element) 
-				break;
-			case "recaptcha":
-				elements += recaptcha(element)
-				break;
-			case "spacer":
-				elements += spacer(element)
-				break;
-			case "signature":
-				elements += signature(element)
-				break;
-			default:
-				elements += ""
+				case "heading":
+					elements += this.heading(element)
+					break;
+				case "paragraph":
+					elements += this.paragriph(element)
+					break;
+				case "text":
+					elements += this.text(element)
+					break;
+				case "number":
+					elements += this.number(element)
+					break;
+				case "email":
+					elements += this.text(element)
+					break;
+				case "textarea":
+					elements += this.textarea(element)
+					break;
+				case "pagebreak":
+					elements += this.pagebreak(element)
+					break;
+				case "radio":
+					elements += this.radio(element)
+					break;
+				case "checkbox":
+					elements += this.checkbox(element)
+					break;
+				case "selectlist":
+					elements += this.selectlist(element)
+					break;
+				case "date":
+					elements += this.date(element)
+					break;
+				case "file":
+					elements += this.file(element)
+					break;
+				case "button":
+					elements += this.button(element) 
+					break;
+				case "recaptcha":
+					elements += this.recaptcha(element)
+					break;
+				case "spacer":
+					elements += this.spacer(element)
+					break;
+				case "signature":
+					elements += this.signature(element)
+					break;
+				default:
+					elements += ""
 			} 
 		})
 
@@ -99,29 +71,28 @@
 
 	}
 
-	
-	const formInit = (formData) => {
-		return classReact(formData)
+	 formInit (formData)  {
+		return this.classReact(formData)
 	}
 
-	const importsReact = () => {
+	 importsReact ()  {
 		return `
 		import React, { Component } from 'react'
 
 		`
 	}
 
-	const classReact = (formData) => {
+	 initReact (formData)  {
 		return	`
-		${importsReact()}
-		export default className Formulario extends Component {
-			${constructorReact() + componentDidupdateReact() + componentWillMountReact() + functionsReact() + initRenderReact(formData)}
+		${this.importsReact()}
+		export default class Formulario extends Component {
+			${this.constructorReact() + this.componentDidupdateReact() + this.componentWillMountReact() + this.functionsReact() + this.initRenderReact(formData)}
 		}
 
 		`
 	}
 
-	const constructorReact = () => {
+	 constructorReact ()  {
 		return `
 			constructor() {
 				super();
@@ -134,7 +105,7 @@
 		`
 	}
 
-	const componentWillMountReact = () => {
+	 componentWillMountReact ()  {
 		return `
 		componentWillMount() {
 			this.setState({ exemplo: true, page: 0 });
@@ -143,7 +114,7 @@
 		`
 	}
 
-	const componentDidupdateReact = () => {
+	 componentDidupdateReact ()  {
 		return `
 		componentDidUpdate(prevProps, prevState) {
 			if (prevState.page != this.state.page){
@@ -174,34 +145,34 @@
 		`
 	}
 
-	const functionsReact = () => {
+	 functionsReact ()  {
 		return `
-		submit = () => {
+		submit ()  {
 			alert("submitou")
 		}
 
-		next = () => {
+		next ()  {
 			this.setState({page: this.state.page + 1})
 		}
 
-		previous = () => {
+		previous ()  {
 			this.setState({page: this.state.page - 1})
 		}
 
 		`
 	}
 
-	const initRenderReact = (form_data) => {
+	 initRenderReact (form_data)  {
 		return `
 			render(){
 				return (
-					${formReact(form_data)}
+					${this.formReact(form_data)}
 				)
 			}
 		`
 	}
 
-	const heading = (data) => {
+	 heading (data)  {
 		return `
 		<div className="${data.fields.containerClass.value}">
 			<h3 className="legend">${data.fields.text.value}</h3>
@@ -210,15 +181,7 @@
 		`
 	}
 
-	const spacer = (data) => {
-		return `
-		<div className="${data.fields.containerClass.value}">
-			<div style="height: ${data.fields.height.value}px" ></div>
-		</div>
-		`
-	}
-
-	const paragriph = (data) => {
+	 paragriph (data)  {
 		return `
 		<div className="${data.fields.containerClass.value}">
 			<p>${data.fields.text.value}</p>
@@ -227,7 +190,7 @@
 		`
 	}
 
-	const text = (data) => {
+	 text (data)  {
 		return `
 		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
@@ -239,18 +202,26 @@
 		`
 	}
 
-	const number = (data) => {
+	number (data) {
 		return `
 		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
-				<label  className="${data.fields.labelClass.value}" for="${data.fields.id.value}">${data.fields.label.value}</label>
+				<label  className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 				<input type="number" id="${data.fields.id.value}" name="${data.fields.id.value}" value="" data-alias="${data.fields.alias.value}"  className="${data.fields.cssClass.value}" />
 			</div>
 		</div>
 		`
+	}		
+
+	spacer(data) {
+		return `
+		<div className="${data.fields.containerClass.value}">
+			<div style="{{height: ${data.fields.height.value}}}" ></div>
+		</div>
+		`
 	}
 
-	const textarea = (data) => {
+	 textarea (data)  {
 		return `
 		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
@@ -262,12 +233,12 @@
 		`
 	}
 
-	const formStepsActions = (index) => {
+	 formStepsActions (index)  {
 		if (index == 1){
 			return `<div className="form-action ${data.fields.containerClass.value}">
 				<button onClick={() => this.next()} type="button" className="btn btn-primary next" >Seguinte</button>
 			</div>`
-		}else if(index < formStepsList.length){
+		}else if(index < this.formStepsList.length){
 			return `<div className="form-action ${data.fields.containerClass.value}">
 				<button onClick={() => this.previous()} type="button" className="btn btn-primary previous" >Anterior</button>
 				<button onClick={() => this.next()} type="button" className="btn btn-primary next" >Seguinte</button>
@@ -276,9 +247,9 @@
 		return ``
 	}
 
-	const pagebreak = (data) => {
+	 pagebreak (data)  {
 		let page = data.fields.id.value.split("_")
-		let action = formStepsActions(parseInt(page[1]))
+		let action = this.formStepsActions(parseInt(page[1]))
 		return `
 				${action}
 		</fieldset>
@@ -286,7 +257,7 @@
 		`
 	}
 
-	const radio = (data) => {
+	 radio (data)  {
 		let loop = ""
 		return `
 		<div className="${data.fields.containerClass.value}">
@@ -294,13 +265,14 @@
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 					${data.fields.radios.value.forEach((radio, index) => {
 						loop += `<div className="radio ">
-							<input type="radio" name="${data.fields.id.value}_${radio[index]}" id="${data.fields.id.value}_${radio[index]}" defaultValue="Azul" data-alias="${data.fields.alias.value}" defaultChecked />
+							<input type="radio" name="${data.fields.id.value}_${radio[index]}" id="${data.fields.id.value}_${radio[index]}" defaultValue="Azul" data-alias="" defaultChecked />
 								<label htmlFor="${data.fields.id.value}_${index}" className="${data.fields.cssClass.value}">
 									${radio.split("|")[0]}
 								</label>
 							</div>
 							`
 					}) }
+					${loop}
 				<span id="${data.fields.id.value}"></span>
 			</div>
 		</div>
@@ -308,7 +280,7 @@
 		`
 	}
 
-	const checkbox = (data) => {
+	 checkbox (data)  {
 		let loop = ""
 		return `
 		<div className="${data.fields.containerClass.value}">
@@ -316,12 +288,13 @@
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
 				${data.fields.checkboxes.value.forEach((checkbox, index) => {
 					loop += `<div className="checkbox ">
-						<input type="checkbox" name="${data.fields.id.value}[]" id="${data.fields.id.value}_${checkbox[index]}" defaultValue="${checkbox}" data-alias="${data.fields.alias.value}" defaultChecked />
+						<input type="checkbox" name="${data.fields.id.value}[]" id="${data.fields.id.value}_${checkbox[index]}" defaultValue="${checkbox}" data-alias="" defaultChecked />
 						<label htmlFor="${data.fields.id.value}_${checkbox[index]}" className="checkbox-inline">
 							${checkbox.split("|")[0]} </label>
 					</div>
 					`
 				}) }
+				${loop}
 				<span id="${data.fields.id.value}"></span>
 			</div>
 		</div>
@@ -329,18 +302,19 @@
 		`
 	}
 
-	const selectlist = (data) => {
+	 selectlist (data)  {
 		let loop = ""
 		return `
 		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
-				<select id="${data.fields.id.value}" name="${data.fields.id.value}[]" data-alias="${data.fields.alias.value}"  className="${data.fields.cssClass.value}">
+				<select id="${data.fields.id.value}" name="${data.fields.id.value}[]" data-alias=""  className="${data.fields.cssClass.value}">
 					${data.fields.options.value.forEach((option) => {
 						loop += `<option>${option.split("|")[0]}</option>
 
 						`
 					})}
+					${loop}
 				</select>
 			</div>
 		</div>
@@ -348,35 +322,35 @@
 		`
 	}
 
-	const date = (data) => {
+	 date (data)  {
 		return `
 		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
-				<input type="date" id="${data.fields.id.value}" name="${data.fields.id.value}" defaultValue="" data-alias="${data.fields.alias.value}" className="${data.fields.cssClass.value}" />
+				<input type="date" id="${data.fields.id.value}" name="${data.fields.id.value}" defaultValue="" data-alias="" className="${data.fields.cssClass.value}" />
 			</div>
 		</div>
 
 		`
 	}
 
-	const file = (data) => {
+	 file (data)  {
 		return `
 		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
 				<label className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">${data.fields.label.value}</label>
-				<input type="file" id="${data.fields.id.value}" name="${data.fields.id.value}[]" data-alias="${data.fields.alias.value}" accept=".gif, .jpg, .png" />
+				<input type="file" id="${data.fields.id.value}" name="${data.fields.id.value}[]" data-alias="" accept=".gif, .jpg, .png" />
 			</div>
 		</div>
 
 		`
 	}
 
-	const signature = (data) => {
+	signature (data) {
 		return `
 		<div className="${data.fields.containerClass.value}">
 			<div className="form-group">
-				<label  className="${data.fields.labelClass.value}" for="${data.fields.id.value}">Signature</label>
+				<label  className="${data.fields.labelClass.value}" htmlFor="${data.fields.id.value}">Signature</label>
 				<div className="signature-pad">
 					<canvas id="${data.fields.id.value}" width="${data.fields.width.value}" height="${data.fields.height.value}" data-color="${data.fields.color.value}" ></canvas>
 				</div>
@@ -388,11 +362,10 @@
 				<input type="hidden" name="hidden_${data.fields.id.value}" id="hidden_${data.fields.id.value}" value="" data-alias="${data.fields.alias.value}" data-label="${data.fields.id.value}"  />
 			</div>
 		</div>
-
 		`
 	}
 
-	const recaptcha = (data) => {
+	recaptcha (data) {
 		return `
 		<div className="form-group ${data.fields.containerClass.value}">
 			<div id="${data.fields.id.value}" className="g-recaptcha" data-sitekey="6Lf5Tt4ZAAAAAPCMN7WSRFSpb40H4tWNU9FcTuwI" data-theme="${data.fields.theme.value[0].selected === true ? data.fields.theme.value[0].value : data.fields.theme.value[1].value}" data-type="${data.fields.theme.value[0].selected === true ? data.fields.type.value[0].value : data.fields.type.value[1].value}" data-size="${data.fields.size.value[0].selected === true ? data.fields.size.value[0].value : data.fields.size.value[1].value}"></div>
@@ -404,7 +377,7 @@
 	explicar como funcionar essa parte mais detalhado, fazer um diagrama de sequencia para mostrar o fluxo
 	considerações: citar num readme orientando sobre a inclusão das libs "bootstrap, css, etc..."
 	*/
-	const formReact = (form_data) => {
+	 formReact (form_data)  {
 		return `
 		<div className="container">
 			<div className="row">
@@ -415,13 +388,13 @@
 							<div className="panel-body">
 								<div className="form-container">
 									<div id="messages"></div>
-									<form action="#" method="post" encType="multipart/form-data"  id="form-app">
-										${form_data.settings.formSteps ? formSteps(form_data.settings.formSteps) : ""}
+									<form action="#" method="post" encType="multipart/form-data" id="form-app">
+										${typeof form_data.settings.formSteps !== 'undefined' ? this.formSteps(form_data.settings.formSteps) : ""}
 										<fieldset className="row" data-index="0">
-										${elementCreate(form_data.initForm)}
+										${this.elementCreate(form_data.initForm)}
 										</fieldset>
 									</form>
-									${form_data.settings.formSteps.progressBar ? progressBar() : ""}
+									${typeof form_data.settings.formSteps.progressBar !== 'undefined' ? this.progressBar() : ""}
 								</div>
 							</div>
 						</div>
@@ -433,10 +406,10 @@
 		`
 	}
 
-	const button = (data) => {
+	 button (data)  {
 		return `
-		<div className="${data.fields.containerClass.value}">
-		${formStepsList.length ? `
+		<div class="${data.fields.containerClass.value}">
+		${this.formStepsList.length > 0 ? `
 				<button onClick={() => this.previous()} type="button" className="btn btn-primary previous" >Anterior</button>
 			` : ``}
 		<button onClick={() => this.submit()} type="button" id="${data.fields.id.value}" name="${data.fields.id.value}" className="${data.fields.cssClass.value}">Enviar</button>
@@ -444,12 +417,12 @@
 		`
 	}
 
-	const formSteps = (data) => {
+	 formSteps (data)  {
 		let steps = ""
-		formStepsList = data.fields.steps.value
+		this.formStepsList = data.fields.steps.value
 
 		return `
-		<div className="${data.fields.steps.name}">
+		<div className="steps">
 			${data.fields.steps.value.forEach((step, index) => {
 				steps += `<div className="step ${index == 0 ? "current" : ""}" data-step="${index}">
 					<div className="stage">${index + 1}</div> 
@@ -463,7 +436,7 @@
 		`
 	}
 
-	const progressBar = () => {
+	 progressBar ()  {
 		return `
 		<div id="progress" className="progress" style={{display: "none"}}>
 			<div id="bar" className="progress-bar" role="progressbar" style={{width: 0}}>
@@ -473,9 +446,12 @@
 
 		`
 	}
+}
 
+function initInterpretador(objeto = 'react', json_data = {}){
+	let Interpretador
+	if(objeto == 'react')
+		Interpretador = new React(json_data)
 
-</script>
-
-</body>
-</html>
+	return Interpretador.init()
+}
